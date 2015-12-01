@@ -52,7 +52,7 @@ public class DefaultSearchResults implements SearchResults {
     }
     
     public SearchQuery getSearchQuery(int startingIndex, int maxResultCount) {
-        return new DefaultSearchQuery(this.startIndex, this.totalRecords, this.query.getEnteredQuery(), this.query.getFilterQuery(), this.query.getCollectionId());
+        return new DefaultSearchQuery(this.startIndex, this.totalRecords, this.query.getEnteredQuery(), this.query.getFilterQuery(), this.query.getCollectionId(), this.query.onlyWithoutImages());
     }
 
     public SearchQuery getSearchQuery() {

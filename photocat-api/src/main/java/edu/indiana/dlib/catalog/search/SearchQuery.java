@@ -56,5 +56,10 @@ public interface SearchQuery {
      */
     public String getCollectionId();
     
+    /**
+     * Gets boolean value that when true indicates that the search should limit
+     * results only to those that have no views (images).
+     */
+    public boolean onlyWithoutImages();
     
 }

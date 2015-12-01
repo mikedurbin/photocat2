@@ -105,7 +105,7 @@ public class SaveSearchOperation implements Operation {
                     ids.add(im.getId());
                     percentComplete = ((double) ids.size() / (double) results.getTotalResultCount() );
                 }
-                query = new DefaultSearchQuery(ids.size(), 100, query.getEnteredQuery(), query.getFilterQuery(), query.getCollectionId());
+                query = new DefaultSearchQuery(ids.size(), 100, query.getEnteredQuery(), query.getFilterQuery(), query.getCollectionId(), query.onlyWithoutImages());
                 results = sm.search(query);
             } while (ids.size() < results.getTotalResultCount());
             Batch batch = bm.createNewBatch(username, collectionId, batchName, ids);

@@ -96,6 +96,8 @@ public class SearchPage extends CollectionPage {
     
     private TextField queryInput;
     
+    private Checkbox withoutImages;
+    
     private FilterQueryField filterField;
     
     private Select pageSize;
@@ -127,6 +129,10 @@ public class SearchPage extends CollectionPage {
         queryInput = new TextField("query");
         queryInput.setWidth("32em");
         searchForm.add(queryInput);
+        
+        withoutImages = new Checkbox("withoutImages");
+        withoutImages.setChecked(false);
+        searchForm.add(withoutImages);
         
         filterField = new FilterQueryField("filter");
         searchForm.add(filterField);
@@ -222,7 +228,7 @@ public class SearchPage extends CollectionPage {
     }
 
     private DefaultSearchQuery getSearchQueryFromForm(int offset) {
-        return new DefaultSearchQuery(offset, Integer.parseInt((String) pageSize.getSelectedValues().get(0)), queryInput.getValue(), filterField.getValue(), collection.getId());        
+        return new DefaultSearchQuery(offset, Integer.parseInt((String) pageSize.getSelectedValues().get(0)), queryInput.getValue(), filterField.getValue(), collection.getId(), withoutImages.isChecked());        
     }
     
     /**
@@ -412,7 +418,7 @@ public class SearchPage extends CollectionPage {
     	if (currentPage == null) {
     		return null;
     	} else {
-    		DefaultSearchQuery nextPageQuery = new DefaultSearchQuery(currentPage.getStartingIndex() + currentPage.getResults().size(), currentPage.getSearchQuery().getMaxRecords(), currentPage.getSearchQuery().getEnteredQuery(), currentPage.getSearchQuery().getFilterQuery(), currentPage.getSearchQuery().getCollectionId());
+    		DefaultSearchQuery nextPageQuery = new DefaultSearchQuery(currentPage.getStartingIndex() + currentPage.getResults().size(), currentPage.getSearchQuery().getMaxRecords(), currentPage.getSearchQuery().getEnteredQuery(), currentPage.getSearchQuery().getFilterQuery(), currentPage.getSearchQuery().getCollectionId(), currentPage.getSearchQuery().onlyWithoutImages());
     		SearchResults results;
 			try {
 				results = sm.search(nextPageQuery);

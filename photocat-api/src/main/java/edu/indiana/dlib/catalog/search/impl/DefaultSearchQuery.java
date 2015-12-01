@@ -45,12 +45,15 @@ public class DefaultSearchQuery implements SearchQuery {
     
     private String collectionId;
     
-    public DefaultSearchQuery(int startingIndex, int maxRecords, String query, String parsedQuery, String collectionId) {
+    private boolean onlyWithoutImages;
+    
+    public DefaultSearchQuery(int startingIndex, int maxRecords, String query, String parsedQuery, String collectionId, boolean onlyWithoutImages) {
         this.startingIndex = startingIndex;
         this.maxRecords = maxRecords;
         this.query = query;
         this.parsedQuery = parsedQuery;
         this.collectionId = collectionId;
+        this.onlyWithoutImages = onlyWithoutImages;
     }
     
     public int getMaxRecords() {
@@ -71,6 +74,10 @@ public class DefaultSearchQuery implements SearchQuery {
     
     public String getCollectionId() {
         return this.collectionId;
+    }
+    
+    public boolean onlyWithoutImages() {
+        return this.onlyWithoutImages;
     }
 
 }

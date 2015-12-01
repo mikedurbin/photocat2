@@ -373,6 +373,9 @@ public class DLPSearchManager implements SearchManager {
                 if (searchQuery.getFilterQuery() != null) {
                     query = query + " and (" + searchQuery.getFilterQuery() + ")";
                 }
+                if (searchQuery.onlyWithoutImages()) {
+                    query = query + " and (hasView.present = 0)";
+                }
             }
         }
         long end = System.currentTimeMillis();

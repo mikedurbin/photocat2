@@ -33,6 +33,7 @@ import java.util.Properties;
 
 import org.apache.lucene.document.Document;
 
+import edu.indiana.dlib.catalog.config.Aspect;
 import edu.indiana.dlib.catalog.config.CollectionConfiguration;
 import edu.indiana.dlib.catalog.config.DocumentHelper;
 import edu.indiana.dlib.catalog.config.FieldData;
@@ -141,6 +142,24 @@ public class PhotocatItemIndex extends AtomicObjectLuceneIndex {
                         }
                     }
                 }
+            }
+        }
+        
+        // index the aspects (views)
+        if (item.getAspects() != null) {
+            for (Aspect a : item.getAspects()) {
+                if (a.getThumbnailView() != null) {
+                    CQLStyleLuceneDocumentConverter.addKeywordField("hasView", "thumbnail", indexDoc);
+                }
+                if (a.getScreenView() != null) {
+                    CQLStyleLuceneDocumentConverter.addKeywordField("hasView", "screen", indexDoc);
+                }
+                if (a.getLargeView() != null) {
+                    CQLStyleLuceneDocumentConverter.addKeywordField("hasView", "large", indexDoc);
+                }
+                if (a.getScalableView() != null) {
+                    CQLStyleLuceneDocumentConverter.addKeywordField("hasView", "scalable", indexDoc);
+                }                
             }
         }
         
